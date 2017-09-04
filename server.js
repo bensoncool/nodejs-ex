@@ -104,7 +104,7 @@ var MyRed = function() {
 
         //setup basic authentication
         var basicAuth = require('basic-auth-connect');
-        self.app.use(basicAuth(function(user, pass) {
+        self.app.use(self.redSettings.httpAdminRoot,RED.httpAdmin,basicAuth(function(user, pass) {
             return user === 'test' && pass === atob('dGVzdA==');
         }));
 
@@ -113,7 +113,7 @@ var MyRed = function() {
         console.log('%s is the userDir for RED', self.redSettings.userDir);
 
         // Serve the editor UI from /red
-        self.app.use(self.redSettings.httpAdminRoot,RED.httpAdmin);
+        //self.app.use(self.redSettings.httpAdminRoot,RED.httpAdmin);
 
         // Serve the http nodes UI from /api
         self.app.use(self.redSettings.httpNodeRoot,RED.httpNode);
